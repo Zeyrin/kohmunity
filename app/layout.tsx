@@ -11,7 +11,8 @@ import "./globals.css";
 export const ensureStatic = "navigation";
 
 // Only the display face is preloaded (it's in the first viewport). Serif + mono swap in.
-const unbounded = Unbounded({ subsets: ["latin"], variable: "--font-unbounded", display: "swap" });
+// One static 900 cut (~16KB) instead of the variable font (~50KB): it's the LCP text's font.
+const unbounded = Unbounded({ subsets: ["latin"], weight: "900", variable: "--font-unbounded", display: "swap" });
 const instrument = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",

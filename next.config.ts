@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // ~10KB gz of Tailwind CSS inlined into the HTML: kills the render-blocking request.
+    // Right trade-off here: most traffic is first-time visitors from Instagram/TikTok.
+    inlineCss: true,
+  },
   images: {
     // AVIF first (~30% smaller than WebP on these photos), WebP fallback.
     formats: ["image/avif", "image/webp"],

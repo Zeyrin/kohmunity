@@ -83,15 +83,6 @@ export function Tribe() {
             </li>
           );
         })}
-        <li
-          className="absolute left-1/2 top-[98%] -translate-x-1/2 md:left-[45%] md:top-[44%]"
-          style={{ zIndex: 0 }}
-          aria-hidden="true"
-        >
-          <p className="display whitespace-nowrap text-[18vw] text-ink/5 md:text-[13vw]">
-            fam
-          </p>
-        </li>
       </ul>
 
       <div className="mt-24 flex flex-col items-center gap-3 px-4 text-center md:mt-10">

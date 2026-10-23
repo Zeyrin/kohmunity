@@ -42,8 +42,8 @@
   --bg-3: #e3c48d;
   --ink: var(--k-ink-day);
   --ink-dim: #463d73; /* 8.4:1 on --bg */
-  --accent: #d4128a; /* pink deepened for contrast on sand: 4.7:1 */
-  --accent-2: var(--k-uv);
+  --accent: #a90b6d; /* pink deepened for contrast: 5.7:1 on sand, 4.8:1 on sand-2 */
+  --accent-2: #5b2fd6; /* UV deepened for sand */
   --accent-3: #0f7a5c;
   --on-accent: var(--k-cream);
   --line: rgb(23 17 61 / 0.18);
@@ -178,7 +178,7 @@ html.lenis body {
     background: var(--accent);
     color: var(--on-accent);
     font-family: var(--font-display);
-    font-weight: 800;
+    font-weight: 900;
     font-size: 0.95rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -201,8 +201,8 @@ html.lenis body {
   z-index: 60;
   pointer-events: none;
   opacity: var(--grain-opacity);
-  background-image: url("/noise.png");
-  background-size: 160px 160px;
+  background-image: url("/noise.webp");
+  background-size: 128px 128px;
   animation: grain 0.8s steps(4) infinite;
 }
 @keyframes grain {

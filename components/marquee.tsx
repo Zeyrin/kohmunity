@@ -35,7 +35,7 @@ export function Marquee() {
   return (
     <div className="relative z-10 -my-6 overflow-hidden py-10" role="presentation">
       <Tape items={lineA} className="-rotate-3 bg-accent text-on-accent" />
-      <Tape items={lineB} reverse className="-mt-4 rotate-2 bg-accent-2 text-night" />
+      <Tape items={lineB} reverse className="-mt-4 rotate-2 bg-accent-2 text-night in-data-[theme=day]:text-cream" />
     </div>
   );
 }

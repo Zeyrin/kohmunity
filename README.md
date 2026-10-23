@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KOHMUNITY — website
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 (App Router, Cache Components) · TypeScript · Tailwind v4 · GSAP + ScrollTrigger · Lenis. Fully static; deploy on Vercel as-is.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # fails on purpose if anything becomes request-time (ensureStatic = "navigation")
+npm run photos     # only when changing which photos are used (reads /photos, writes /public/photos)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content (no component changes needed)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | File |
+| --- | --- |
+| Booking URL, socials, address, ratings, policies, Full Moon date overrides | `content/config.ts` |
+| Rooms, prices, one-liners | `content/rooms.ts` |
+| Weekly line-up (`source: "draft"` = invented, confirm before launch) | `content/events.ts` |
+| Group-chat reviews (**placeholder copy**, replace with real guest quotes) | `content/reviews.ts` |
+| Polaroid wall photos, captions, positions | `content/tribe.ts` |
+| Alt text + crop focus for every photo | `content/photos.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Search the repo for `PLACEHOLDER` to find everything that still needs a real value.
 
-## Learn More
+### Photos
+Camera originals live in `/photos` (not deployed, see `.vercelignore`). `scripts/optimize-photos.mjs`
+picks the curated set, crops the portrait hero variants, strips EXIF (GPS!), writes 2400px masters to
+`/public/photos` and a typed manifest (`content/photos.generated.ts`). `next/image` serves AVIF/WebP from those.
 
-To learn more about Next.js, take a look at the following resources:
+### Full Moon dates
+`lib/moon.ts` computes full moons (Meeus algorithm, ~1 min accuracy) and maps them to party nights
+(Bangkok calendar date of the full moon). When the organisers shift a date for a Buddhist holiday, add it to
+`fullMoonOverrides` in `content/config.ts`. The countdown runs client-side; `/full-moon-party-dates`
+regenerates daily.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture notes
+- **Theme**: `<html data-theme="day|night">` is set by a tiny inline head script before first paint
+  (saved choice → else local hour, 07–19 = day). All colours are CSS variables remapped per mode;
+  `.on-photo` scopes always-light tokens for text sitting on photos. Full-moon eruption = `data-moon="full"`.
+- **Hero LCP**: the same head script preloads only the hero image variant (mode × viewport) the visitor sees.
+- **Motion**: `lib/use-section-motion.ts` boots each animated section after load + idle and only when it
+  nears the viewport. Reduced motion → the runtime resolves `null` and the static layout stays.
+  Every section is complete without JS.
+- **Mobile first**: rooms use native scroll-snap on phones (pinned GSAP scroll only ≥768px);
+  drag on the polaroid wall and the magnetic cursor only load for fine pointers.
