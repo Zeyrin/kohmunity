@@ -76,11 +76,12 @@ export function Hero() {
           <p className="label mb-3 text-ink-dim">
             Koh Phangan · Thong Sala · <span className="text-accent">The Full Moon island</span>
           </p>
-          <h1 id="hero-title" className="display glow text-[18.5vw] text-ink md:text-[9.6vw]">
-            <span className="block">Come</span>
-            <span className="block md:-mt-[0.05em]">alone.</span>
-            <span className="serif-accent mt-1 block text-[0.42em] leading-[0.95] text-accent md:mt-3 md:text-[0.4em]">
-              Leave with a family.
+          <h1 id="hero-title" className="display glow text-[16vw] text-ink md:text-[8vw]">
+            <span className="serif-accent mb-2 block text-[0.42em] leading-[0.95] text-accent md:mb-3 md:text-[0.4em]">
+              Come alone.
+            </span>
+            <span className="block">
+              Leave<br className="md:hidden" /> with<br className="hidden md:inline" /> a family.
             </span>
           </h1>
           <div className="mt-6 flex flex-col gap-5 md:mt-10 md:flex-row md:items-end md:justify-between">
