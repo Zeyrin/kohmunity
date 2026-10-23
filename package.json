@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "photos": "node scripts/optimize-photos.mjs",
+    "reviews": "node scripts/fetch-reviews.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

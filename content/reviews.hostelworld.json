@@ -1,0 +1,133 @@
+{
+  "source": "Hostelworld",
+  "propertyId": 336440,
+  "fetchedAt": "2026-10-23",
+  "reviews": [
+    {
+      "id": "16708125",
+      "date": "2026-10-18",
+      "text": "I have been living in hostels while traveling for three years, and this is the best hostel I have ever stayed in. I have already spent more than 10 days here, and I plan to stay for another 15 days. It is truly the best hostel so far.",
+      "rating": 10,
+      "country": "India",
+      "countryCode": "IN",
+      "age": "25-30"
+    },
+    {
+      "id": "16705148",
+      "date": "2026-10-17",
+      "text": "Really good hostel. Room and bathrooms are clean, lots of facilities. Also good social space where everyone gets to know each other. Drinks and food are cheap yet good quality. Lots of daily activities too. \nSaar and Caty were great and made my stay enjoyable!\nHighly recommend",
+      "rating": 10,
+      "country": "England",
+      "countryCode": "ENG",
+      "age": "18-24"
+    },
+    {
+      "id": "16699222",
+      "date": "2026-10-13",
+      "text": "I had an amazing time at Kohmunity!!!! Z made me feel sooo welcome and comfortable like it was my home!!",
+      "rating": 10,
+      "country": "Canada",
+      "countryCode": "CA",
+      "age": "25-30"
+    },
+    {
+      "id": "16701520",
+      "date": "2026-10-12",
+      "text": "Nice place, very social and great atmosphere. Plus the yoga classes with Caty were amazing.",
+      "rating": 10,
+      "country": "England",
+      "countryCode": "ENG",
+      "age": "31-40"
+    },
+    {
+      "id": "16700657",
+      "date": "2026-10-12",
+      "text": "My favourite hostel so far especially because of the people! Karoll was the best and always ensured there was a great vibe and everyone is having fun !!",
+      "rating": 10,
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "age": "25-30"
+    },
+    {
+      "id": "16697284",
+      "date": "2026-10-12",
+      "text": "Oh such a cool place. Incredible how they offer clean room and free yoga and many activities. They can’t make money this way.",
+      "rating": 10,
+      "country": "Peru",
+      "countryCode": "PE",
+      "age": "18-24"
+    },
+    {
+      "id": "16700769",
+      "date": "2026-10-04",
+      "text": "really nice spot great music too and comfy beds. \nthanks to all the staff for the great hospitality specially Zi.",
+      "rating": 10,
+      "country": "USA",
+      "countryCode": "US",
+      "age": "18-24"
+    },
+    {
+      "id": "16686038",
+      "date": "2026-09-29",
+      "text": "I did not expect to have such a good time here, but it has been some of the best vacation I’ve had in my whole life and I meant so many nice people here that I’ve made friendships with. The best people that helped me learn about this island this week was Zi 💕",
+      "rating": 10,
+      "country": "USA",
+      "countryCode": "US",
+      "age": "25-30"
+    },
+    {
+      "id": "16686456",
+      "date": "2026-09-28",
+      "text": "Amazing hostel! The best place to stay on the island❤️ love love love",
+      "rating": 10,
+      "country": "Lithuania",
+      "countryCode": "LT",
+      "age": "18-24"
+    },
+    {
+      "id": "16664073",
+      "date": "2026-09-12",
+      "text": "Very nice vibes hostel! Has a party but chilled feel with a lot of great people to meet. Lovely staff and nice bedrooms with ac and curtains",
+      "rating": 10,
+      "country": "England",
+      "countryCode": "ENG",
+      "age": "31-40"
+    },
+    {
+      "id": "16662581",
+      "date": "2026-09-11",
+      "text": "Wow, great place, very social and a very nice pool. Super cool people especially Z who made our group feel super welcome!",
+      "rating": 10,
+      "country": "Canada",
+      "countryCode": "CA",
+      "age": "31-40"
+    },
+    {
+      "id": "16660021",
+      "date": "2026-09-10",
+      "text": "The hostel was really social and really nice the people were really friendly. I made a lot of friends in here. The staff are really friendly too specially Zi can’t wait to be back again 💛🩵",
+      "rating": 10,
+      "country": "Israel",
+      "countryCode": "IL",
+      "age": "18-24"
+    },
+    {
+      "id": "16653539",
+      "date": "2026-09-07",
+      "text": "I liked the pool family dinner was so delicious its very social spot. staff are so friendly Zi is the best.",
+      "rating": 10,
+      "country": "Georgia",
+      "countryCode": "GE",
+      "age": "25-30"
+    },
+    {
+      "id": "16654995",
+      "date": "2026-09-06",
+      "text": "The name says it all. The volunteers and workers really do a great job of making it very fun and making everyone feel welcome. It’s often the most lively place on the island while still being easy to sleep at any time for those that want to. Shoutout to the volunteer Fernando! Great karaoke singer and an even better dancer.",
+      "rating": 10,
+      "country": "Spain",
+      "countryCode": "ES",
+      "age": "25-30"
+    }
+  ]
+}

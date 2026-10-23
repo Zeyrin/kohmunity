@@ -7,6 +7,7 @@ npm install
 npm run dev        # http://localhost:3000
 npm run build      # fails on purpose if anything becomes request-time (ensureStatic = "navigation")
 npm run photos     # only when changing which photos are used (reads /photos, writes /public/photos)
+npm run reviews    # refresh the real Hostelworld reviews snapshot (content/reviews.hostelworld.json)
 ```
 
 ## Editing content (no component changes needed)
@@ -16,7 +17,8 @@ npm run photos     # only when changing which photos are used (reads /photos, wr
 | Booking URL, socials, address, ratings, policies, Full Moon date overrides | `content/config.ts` |
 | Rooms, prices, one-liners | `content/rooms.ts` |
 | Weekly line-up (`source: "draft"` = invented, confirm before launch) | `content/events.ts` |
-| Group-chat reviews (**placeholder copy**, replace with real guest quotes) | `content/reviews.ts` |
+| Group-chat reviews: real Hostelworld reviews, verbatim (`npm run reviews`; hide one via `EXCLUDE` in the script) | `content/reviews.hostelworld.json` |
+| Group-chat hostel lines + Moon bot answers (built from the content files) | `content/reviews.ts`, `lib/chat-replies.ts` |
 | Polaroid wall photos, captions, positions | `content/tribe.ts` |
 | Alt text + crop focus for every photo | `content/photos.ts` |
 
