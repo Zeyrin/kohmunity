@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+/*
+ * DESIGN TOKENS
+ * Raw palette lives in --k-* (never changes). Semantic tokens (--bg, --ink, --accent…) are what
+ * components use; they're remapped per mode on <html data-theme> and for the full-moon
+ * "eruption" via <html data-moon="full">. Flipping a mode = flipping one attribute, so the whole
+ * site re-themes in one style recalc with no per-element JS.
+ */
+:root {
+  --k-night: #07061a;
+  --k-indigo: #120f38;
+  --k-indigo-2: #1d1854;
+  --k-pink: #ff2fb3;
+  --k-acid: #c8ff1a;
+  --k-uv: #8b5cff;
+  --k-sand: #f3e4c8;
+  --k-sand-2: #ead2a6;
+  --k-cream: #fbf6ec;
+  --k-ink-day: #17113d;
+
+  /* night (default) */
+  --bg: var(--k-night);
+  --bg-2: var(--k-indigo);
+  --bg-3: var(--k-indigo-2);
+  --ink: var(--k-cream);
+  --ink-dim: #c7c0e8; /* 11.9:1 on --bg */
+  --accent: var(--k-acid);
+  --accent-2: var(--k-pink);
+  --accent-3: var(--k-uv);
+  --on-accent: var(--k-night);
+  --line: rgb(251 246 236 / 0.16);
+  --glow: 0 0 0.35em rgb(200 255 26 / 0.55);
+  --photo-veil: linear-gradient(180deg, rgb(7 6 26 / 0.55) 0%, rgb(7 6 26 / 0.1) 35%, rgb(7 6 26 / 0.85) 100%);
+  --grain-opacity: 0.09;
+  color-scheme: dark;
+}
+
+:root[data-theme="day"] {
+  --bg: var(--k-sand);
+  --bg-2: var(--k-sand-2);
+  --bg-3: #e3c48d;
+  --ink: var(--k-ink-day);
+  --ink-dim: #463d73; /* 8.4:1 on --bg */
+  --accent: #a90b6d; /* pink deepened for contrast: 5.7:1 on sand, 4.8:1 on sand-2 */
+  --accent-2: #5b2fd6; /* UV deepened for sand */
+  --accent-3: #0f7a5c;
+  --on-accent: var(--k-cream);
+  --line: rgb(23 17 61 / 0.18);
+  --glow: none;
+  --photo-veil: linear-gradient(180deg, rgb(23 17 61 / 0.4) 0%, rgb(23 17 61 / 0.05) 30%, rgb(23 17 61 / 0.55) 55%, rgb(23 17 61 / 0.88) 100%);
+  --grain-opacity: 0.06;
+  color-scheme: light;
+}
+
+/* Full moon eruption — UV takes over regardless of day/night */
+:root[data-moon="full"] {
+  --accent: var(--k-acid);
+  --accent-2: var(--k-pink);
+  --glow: 0 0 0.25em rgb(255 47 179 / 0.8), 0 0 0.9em rgb(139 92 255 / 0.6);
+}
+
+/*
+ * Anything placed ON a photo (hero, room cards…) is always light-on-dark, whatever the mode,
+ * because photos don't change with the theme. Day mode just swaps the accent to pink.
+ */
+.on-photo {
+  --ink: var(--k-cream);
+  --ink-dim: #ece6f7;
+  --accent: var(--k-acid);
+  --on-accent: var(--k-night);
+  color: var(--ink);
+}
+:root[data-theme="day"] .on-photo {
+  --accent: var(--k-pink);
+  --glow: 0 1px 18px rgb(23 17 61 / 0.45);
+}
+:root[data-moon="full"] .on-photo {
+  --accent: var(--k-acid);
+  --glow: 0 0 0.25em rgb(255 47 179 / 0.8), 0 0 0.9em rgb(139 92 255 / 0.6);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-on-accent: var(--on-accent);
+  --color-line: var(--line);
+  --color-night: var(--k-night);
+  --color-pink: var(--k-pink);
+  --color-acid: var(--k-acid);
+  --color-uv: var(--k-uv);
+  --color-sand: var(--k-sand);
+  --color-cream: var(--k-cream);
+
+  --font-display: var(--font-unbounded), "Arial Black", sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-sans: var(--font-jetbrains), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  background: var(--bg);
+  /* the theme flip itself is animated; everything else animates via GSAP */
+  transition: background-color 0.5s var(--ease-out-expo);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  transition: background-color 0.5s var(--ease-out-expo), color 0.5s var(--ease-out-expo);
+}
+
+::selection {
+  background: var(--k-pink);
+  color: var(--k-night);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 900;
+    line-height: 0.82;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+  .serif-accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .glow {
+    text-shadow: var(--glow);
+  }
+  /* Primary CTA — pill, accent fill. Big tap target (min 48px). */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    min-height: 3.25rem;
+    padding: 0 1.6rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    box-shadow: 0 0 0 0 var(--accent);
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+    will-change: transform;
+  }
+  .cta:hover {
+    box-shadow: 0 0 2.2rem -0.2rem var(--accent);
+  }
+  .cta:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Film grain: one tiny noise tile, shifted with steps() — compositor-only, ~0 CPU */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("/noise.webp");
+  background-size: 128px 128px;
+  animation: grain 0.8s steps(4) infinite;
+}
+@keyframes grain {
+  0% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-5%, 3%, 0); }
+  50% { transform: translate3d(4%, -6%, 0); }
+  75% { transform: translate3d(-3%, 5%, 0); }
+  100% { transform: translate3d(2%, -2%, 0); }
+}
+
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee var(--marquee-duration, 28s) linear infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.25; }
+}
+.typing-dot {
+  animation: blink 1s infinite;
+}
+
+/* Things only visible in one mode */
+:root[data-theme="day"] .night-only,
+:root:not([data-theme="day"]) .day-only {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain {
+    animation: none;
+  }
+}
