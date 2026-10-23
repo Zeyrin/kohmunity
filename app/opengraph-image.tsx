@@ -62,7 +62,7 @@ export default function Image() {
             <span>COME</span>
             <span>ALONE.</span>
           </div>
-          <div style={{ fontFamily: "Instrument", fontSize: 64, color: "#c8ff1a", marginTop: 10 }}>Leave with a family.</div>
+          <div style={{ fontFamily: "Instrument", fontSize: 64, color: "#c8ff1a", marginTop: 10 }}>Live with a family.</div>
           <div style={{ display: "flex", marginTop: 26, fontSize: 22, letterSpacing: 4, color: "#c7c0e8", fontFamily: "Unbounded" }}>
             KOHMUNITY · KOH PHANGAN · FULL MOON ISLAND
           </div>
