@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import sharp from "sharp";
 import { site } from "@/content/config";
 
 export const alt = `${site.name} — ${site.tagline} A crew of travellers who met at the hostel, under a full moon.`;
@@ -9,13 +8,11 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // satori supports a CSS subset: no `inset`, every box is flex. Static inputs → read once at module scope (prerendered at build).
+// No sharp here: its ESM build imports package.json as a JSON module, which Node < 22.12 reports as an
+// ExperimentalWarning that the Next dev overlay shows as an error. satori's objectFit does the crop.
 const root = process.cwd();
 const [photo, display, serif] = await Promise.all([
-  // hero shot, cropped to the OG ratio and pushed right so the copy sits on the darker left
-  sharp(join(root, "public/photos/night-crew.jpg"))
-    .resize(1200, 630, { fit: "cover", position: "attention" })
-    .jpeg({ quality: 80 })
-    .toBuffer(),
+  readFile(join(root, "public/photos/night-crew.jpg")),
   readFile(join(root, "assets/fonts/Unbounded-Black.ttf")),
   readFile(join(root, "assets/fonts/InstrumentSerif-Italic.ttf")),
 ]);
@@ -25,7 +22,8 @@ export default function Image() {
   return new ImageResponse(
     (
       <div style={{ display: "flex", width: "100%", height: "100%", position: "relative", background: "#07061a" }}>
-        <img src={photoSrc} width={1200} height={630} style={{ position: "absolute", top: 0, left: 0 }} alt="" />
+        {/* eslint-disable-next-line @next/next/no-img-element -- satori renders plain <img>, not next/image */}
+        <img src={photoSrc} width={1200} height={630} style={{ position: "absolute", top: 0, left: 0, objectFit: "cover" }} alt="" />
         <div
           style={{
             position: "absolute",

@@ -59,6 +59,13 @@
   --accent-2: var(--k-pink);
   --glow: 0 0 0.25em rgb(255 47 179 / 0.8), 0 0 0.9em rgb(139 92 255 / 0.6);
 }
+/* Acid on sand is unreadable (~1.2:1): in day mode the eruption goes deep UV instead. */
+:root[data-theme="day"][data-moon="full"] {
+  --accent: #5b2fd6; /* 6.1:1 on sand */
+  --accent-2: #a90b6d;
+  --on-accent: var(--k-cream);
+  --glow: 0 0 0.6em rgb(139 92 255 / 0.35);
+}
 
 /*
  * Anything placed ON a photo (hero, room cards…) is always light-on-dark, whatever the mode,

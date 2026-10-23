@@ -1,7 +1,7 @@
 import { site } from "@/content/config";
 import { HERO_BREAKPOINT, heroSources, type HeroVariant } from "@/lib/hero-images";
 import { Countdown } from "./countdown";
-import { MoonScrub } from "./moon-scrub";
+import { MoonHold } from "./moon-hold";
 
 /**
  * Art-directed <picture>. Always loading="lazy": the head script already preloaded the one
@@ -34,10 +34,9 @@ export function Hero() {
     <section
       id="top"
       aria-labelledby="hero-title"
-      // tall wrapper = scroll runway for the moon; collapses to one screen for reduced motion
-      className="relative h-[260svh] motion-reduce:h-svh"
+      className="relative h-svh"
     >
-      <div className="on-photo sticky top-0 h-svh overflow-hidden">
+      <div className="on-photo relative h-full overflow-hidden">
         {/* photo layers */}
         <div className="absolute inset-0">
           <HeroPicture variant="night" className="night-only absolute inset-0 block" />
@@ -45,7 +44,7 @@ export function Hero() {
           {/* UV layer: display:none until JS arms it near full moon, then fades in on eruption */}
           <HeroPicture
             variant="uv"
-            className="absolute inset-0 hidden opacity-0 transition-opacity duration-700 in-data-[armed]:block in-data-[moon=full]:opacity-100"
+            className="absolute inset-0 hidden opacity-0 transition-opacity duration-700 in-data-armed:block in-data-[moon=full]:opacity-100"
           />
           <div className="absolute inset-0" style={{ background: "var(--photo-veil)" }} aria-hidden="true" />
           <div
@@ -57,28 +56,26 @@ export function Hero() {
         </div>
 
         {/* moon */}
-        <div className="absolute left-1/2 top-[10svh] w-[min(54vw,30svh)] -translate-x-1/2 md:left-auto md:right-[7vw] md:top-1/2 md:w-[min(40vw,68svh)] md:-translate-y-1/2 md:translate-x-0">
-          <MoonScrub />
+        <div className="absolute left-1/2 top-[max(5.5rem,11svh)] w-[min(46vw,24svh)] -translate-x-1/2 md:left-auto md:right-[7vw] md:top-1/2 md:w-[min(40vw,68svh)] md:-translate-y-1/2 md:translate-x-0">
+          <MoonHold />
           <p
             data-hero-sticker
             aria-hidden="true"
-            className="display invisible absolute -left-[4%] top-[2%] whitespace-nowrap rounded-full bg-acid px-4 py-2 text-xs text-night shadow-[0_0_30px_#ff2fb3] md:text-sm"
+            className="display pointer-events-none absolute left-[-12%] top-[-6%] whitespace-nowrap rounded-full bg-acid px-4 py-2 text-xs text-night opacity-0 shadow-[0_0_30px_#ff2fb3] md:left-[-4%] md:top-[2%] md:text-sm"
           >
             Full moon, baby 🌕
           </p>
         </div>
 
         {/* copy */}
-        <div
-          data-hero-copy
-          className="absolute inset-x-0 bottom-0 px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:px-12 md:pb-12"
-        >
+        {/* pointer-events-none so the copy never swallows a press meant for the moon; links opt back in */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:px-12 md:pb-12 [&_a]:pointer-events-auto">
           <p className="label mb-3 text-ink-dim">
             Koh Phangan · Thong Sala · <span className="text-accent">The Full Moon island</span>
           </p>
           <h1 id="hero-title" className="display glow text-[18.5vw] text-ink md:text-[9.6vw]">
             <span className="block">Come</span>
-            <span className="block md:-mt-[0.05em]">alone.</span>
+            <span className="block md:mt-[-0.05em]">alone.</span>
             <span className="serif-accent mt-1 block text-[0.42em] leading-[0.95] text-accent md:mt-3 md:text-[0.4em]">
               Leave with a family.
             </span>
@@ -95,14 +92,6 @@ export function Hero() {
             </div>
           </div>
         </div>
-
-        <p
-          data-hero-hint
-          aria-hidden="true"
-          className="label absolute right-4 top-[45svh] origin-right -rotate-90 text-[0.6rem] text-ink-dim motion-reduce:hidden md:right-6 md:top-auto md:bottom-12"
-        >
-          Scroll to fill the moon ↓
-        </p>
       </div>
     </section>
   );
