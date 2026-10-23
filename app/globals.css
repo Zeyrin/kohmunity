@@ -215,6 +215,11 @@ html.lenis body {
   animation: marquee var(--marquee-duration, 28s) linear infinite;
 }
 
+/* chat bubble arriving */
+@keyframes pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.94); }
+}
+
 @keyframes blink {
   50% { opacity: 0.25; }
 }

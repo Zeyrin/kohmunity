@@ -18,7 +18,8 @@ npm run reviews    # refresh the real Hostelworld reviews snapshot (content/revi
 | Rooms, prices, one-liners | `content/rooms.ts` |
 | Weekly line-up (`source: "draft"` = invented, confirm before launch) | `content/events.ts` |
 | Group-chat reviews: real Hostelworld reviews, verbatim (`npm run reviews`; hide one via `EXCLUDE` in the script) | `content/reviews.hostelworld.json` |
-| Group-chat hostel lines + Moon bot answers (built from the content files) | `content/reviews.ts`, `lib/chat-replies.ts` |
+| Group-chat hostel lines, live announcements, how many reviews are static vs "arrive live" | `content/reviews.ts` |
+| Moon bot answers to visitors (built from the content files) | `lib/chat-replies.ts` |
 | Polaroid wall photos, captions, positions | `content/tribe.ts` |
 | Alt text + crop focus for every photo | `content/photos.ts` |
 

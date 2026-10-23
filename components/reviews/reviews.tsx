@@ -1,23 +1,9 @@
 import { site } from "@/content/config";
-import { chatSubtitle, chatTitle, guestReviews, hostelIntro, hostelName, hostelOutro, type GuestReview } from "@/content/reviews";
-import { flag } from "@/lib/flags";
+import { chatInitialCount, chatSubtitle, chatTitle, guestReviews, hostelIntro, hostelOutro } from "@/content/reviews";
 import { SectionHeading } from "../section-heading";
+import { BubbleBody, TypingDots, bubbleIn, chatFont, type ChatItem } from "./bubble";
 import { ChatComposerLazy } from "./chat-composer-lazy";
 import { ChatMotion } from "./chat-motion";
-
-const SHOWN = 10;
-const chatFont = "[font-family:system-ui,-apple-system,'Segoe_UI',Roboto,sans-serif]";
-
-/** Deterministic name colours, like WhatsApp groups — [on dark bubble, on light bubble], all ≥4.5:1. */
-const NAME_COLORS = [
-  ["#ff7ac6", "#c2185b"],
-  ["#7ee0ff", "#0b6b9a"],
-  ["#c8ff1a", "#4d7c0f"],
-  ["#ffb35c", "#b45309"],
-  ["#b69bff", "#6d28d9"],
-  ["#5cffb0", "#047857"],
-];
-const colorFor = (key: string) => NAME_COLORS[[...key].reduce((a, c) => a + c.charCodeAt(0), 0) % NAME_COLORS.length];
 
 /** WhatsApp-ish doodle wallpaper, pure CSS. */
 const wallpaper = {
@@ -27,69 +13,24 @@ const wallpaper = {
   backgroundSize: "46px 46px, 62px 62px, 38px 38px",
 };
 
-const shortDate = (iso: string) =>
-  new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
-
-type Item = { kind: "hostel"; key: string; text: string } | { kind: "guest"; key: string; review: GuestReview };
-
-function TypingDots() {
-  return (
-    <span className="flex gap-1">
-      {[0, 1, 2].map((d) => (
-        <span key={d} className="typing-dot size-1.5 rounded-full" style={{ background: "var(--chat-meta)", animationDelay: `${d * 0.15}s` }} />
-      ))}
-    </span>
-  );
-}
-
-function Bubble({ item }: { item: Item }) {
-  const isHostel = item.kind === "hostel";
-  const [dark, light] = isHostel ? ["#c8ff1a", "#4d7c0f"] : colorFor(item.review.id);
+/** Server-rendered message; ChatMotion swaps its typing dots for the text as it scrolls in. */
+function Bubble({ item }: { item: ChatItem }) {
   return (
     <li data-chat-item className="relative flex flex-col items-start">
       <div data-typing aria-hidden="true" className="absolute left-0 top-0 hidden rounded-xl bg-[var(--chat-in)] px-3.5 py-3">
         <TypingDots />
       </div>
-      <div data-msg className={`max-w-[88%] rounded-xl rounded-tl-sm bg-[var(--chat-in)] px-3 pb-1.5 pt-2 text-[0.92rem] leading-snug shadow-sm ${chatFont}`}>
-        <p
-          className="text-[0.8rem] font-bold text-[var(--n-dark)] in-data-[theme=day]:text-[var(--n-light)]"
-          style={{ "--n-dark": dark, "--n-light": light } as React.CSSProperties}
-        >
-          {isHostel ? (
-            <>
-              {hostelName} <span className="ml-1 rounded bg-[var(--chat-bg)] px-1 py-px text-[0.62rem] font-semibold text-[var(--chat-ink)]">admin</span>
-            </>
-          ) : (
-            <>
-              ~ Guest {flag(item.review.countryCode)} {item.review.country}
-              {item.review.age ? <span className="font-normal"> · {item.review.age.replace("-", "–")}</span> : null}
-            </>
-          )}
-        </p>
-        {isHostel ? (
-          <p>{item.text}</p>
-        ) : (
-          <blockquote cite={site.rating.url} className="whitespace-pre-line">
-            {item.review.text}
-          </blockquote>
-        )}
-        {!isHostel ? (
-          <p className="mt-1 flex justify-between gap-3 text-[0.66rem]" style={{ color: "var(--chat-meta)" }}>
-            <span className="text-[#f5b301]" aria-label={`Rated ${item.review.rating} out of 10`}>
-              ★★★★★ <span style={{ color: "var(--chat-meta)" }}>{item.review.rating}/10</span>
-            </span>
-            <time dateTime={item.review.date}>{shortDate(item.review.date)}</time>
-          </p>
-        ) : null}
+      <div data-msg className={bubbleIn}>
+        <BubbleBody item={item} />
       </div>
     </li>
   );
 }
 
 export function Reviews() {
-  const items: Item[] = [
+  const items: (ChatItem & { key: string })[] = [
     { kind: "hostel", key: "intro", text: hostelIntro },
-    ...guestReviews.slice(0, SHOWN).map((review) => ({ kind: "guest" as const, key: review.id, review })),
+    ...guestReviews.slice(0, chatInitialCount).map((review) => ({ kind: "guest" as const, key: review.id, review })),
     { kind: "hostel", key: "outro", text: hostelOutro },
   ];
 

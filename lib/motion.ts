@@ -13,6 +13,10 @@ import type Lenis from "lenis";
 export type Motion = { gsap: typeof GSAP; ScrollTrigger: typeof ST; lenis: Lenis | null };
 
 let promise: Promise<Motion | null> | null = null;
+let lenisInstance: Lenis | null = null;
+
+/** The smooth-scroll instance if one is running (desktop only), for code that moves the page itself. */
+export const getLenis = () => lenisInstance;
 
 export function prefersReducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -42,6 +46,7 @@ export function loadMotion(): Promise<Motion | null> {
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add((time) => lenis!.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
+      lenisInstance = lenis;
     }
     return { gsap, ScrollTrigger, lenis };
   })();
