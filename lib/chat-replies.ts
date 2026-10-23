@@ -57,7 +57,7 @@ export function replyTo(raw: string, now = new Date()): Reply {
     return { text: `Guests are ${site.policies.ages}. Music off at ${site.policies.musicOff}, no curfew 🌙` };
   }
   if (has(msg, "alone", "solo", "friends", "single", "meet")) {
-    return { text: "Come alone, leave with a family. Literally the point of this place. Family dinner Wednesday, you'll know everyone by Thursday 🫶", cta: book };
+    return { text: "Come alone, live with a family. Literally the point of this place. Family dinner Wednesday, you'll know everyone by Thursday 🫶", cta: book };
   }
   if (is(msg, "hi", "hey", "heyy", "hello", "yo", "sup", "salut", "hola", "ciao", "bonjour")) {
     return { text: "Heyyy 👋 Welcome to the fam! Ask me about prices, the next Full Moon, events or how to find us." };

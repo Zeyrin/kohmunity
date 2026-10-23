@@ -6,7 +6,7 @@ export const site = {
   name: "KOHMUNITY",
   legalName: "Kohmunity Hostel",
   url: "https://kohmunity.com", // PLACEHOLDER: production domain (used for canonical URLs, sitemap, OG)
-  tagline: "Come alone. Leave with a family.",
+  tagline: "Come alone. Live with a family.",
   description:
     "Social hostel in Thong Sala, Koh Phangan — big pool, free morning yoga, family dinners and the island's best Full Moon pre-party. 100 m from the beach.",
 
