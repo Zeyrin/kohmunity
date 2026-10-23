@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import sharp from "sharp";
 import { site } from "@/content/config";
 
 export const alt = `${site.name} — ${site.tagline} A crew of travellers who met at the hostel, under a full moon.`;
@@ -11,11 +10,8 @@ export const contentType = "image/png";
 // satori supports a CSS subset: no `inset`, every box is flex. Static inputs → read once at module scope (prerendered at build).
 const root = process.cwd();
 const [photo, display, serif] = await Promise.all([
-  // hero shot, cropped to the OG ratio and pushed right so the copy sits on the darker left
-  sharp(join(root, "public/photos/night-crew.jpg"))
-    .resize(1200, 630, { fit: "cover", position: "attention" })
-    .jpeg({ quality: 80 })
-    .toBuffer(),
+  // hero shot pre-cropped to 1200×630 by scripts/optimize-photos.mjs (no image lib at runtime)
+  readFile(join(root, "assets/og-base.jpg")),
   readFile(join(root, "assets/fonts/Unbounded-Black.ttf")),
   readFile(join(root, "assets/fonts/InstrumentSerif-Italic.ttf")),
 ]);

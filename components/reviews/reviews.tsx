@@ -1,18 +1,9 @@
-import { chat, chatSubtitle, chatTitle } from "@/content/reviews";
 import { site } from "@/content/config";
+import { chatInitialCount, chatSubtitle, chatTitle, guestReviews, hostelIntro, hostelOutro } from "@/content/reviews";
 import { SectionHeading } from "../section-heading";
+import { BubbleBody, TypingDots, bubbleIn, chatFont, type ChatItem } from "./bubble";
+import { ChatComposerLazy } from "./chat-composer-lazy";
 import { ChatMotion } from "./chat-motion";
-
-/** Deterministic name colours, like WhatsApp groups — [on dark bubble, on light bubble], all ≥4.5:1. */
-const NAME_COLORS = [
-  ["#ff7ac6", "#c2185b"],
-  ["#7ee0ff", "#0b6b9a"],
-  ["#c8ff1a", "#4d7c0f"],
-  ["#ffb35c", "#b45309"],
-  ["#b69bff", "#6d28d9"],
-  ["#5cffb0", "#047857"],
-];
-const colorFor = (name: string) => NAME_COLORS[[...name].reduce((a, c) => a + c.charCodeAt(0), 0) % NAME_COLORS.length];
 
 /** WhatsApp-ish doodle wallpaper, pure CSS. */
 const wallpaper = {
@@ -22,12 +13,32 @@ const wallpaper = {
   backgroundSize: "46px 46px, 62px 62px, 38px 38px",
 };
 
+/** Server-rendered message; ChatMotion swaps its typing dots for the text as it scrolls in. */
+function Bubble({ item }: { item: ChatItem }) {
+  return (
+    <li data-chat-item className="relative flex flex-col items-start">
+      <div data-typing aria-hidden="true" className="absolute left-0 top-0 hidden rounded-xl bg-[var(--chat-in)] px-3.5 py-3">
+        <TypingDots />
+      </div>
+      <div data-msg className={bubbleIn}>
+        <BubbleBody item={item} />
+      </div>
+    </li>
+  );
+}
+
 export function Reviews() {
+  const items: (ChatItem & { key: string })[] = [
+    { kind: "hostel", key: "intro", text: hostelIntro },
+    ...guestReviews.slice(0, chatInitialCount).map((review) => ({ kind: "guest" as const, key: review.id, review })),
+    { kind: "hostel", key: "outro", text: hostelOutro },
+  ];
+
   return (
     <section id="reviews" aria-labelledby="reviews-title" className="relative py-24 md:py-32">
       <div className="md:grid md:grid-cols-[1fr_minmax(0,30rem)] md:items-start md:gap-12 md:pr-12">
         <div className="md:sticky md:top-32">
-          <SectionHeading index="05" label="Reviews" id="reviews-title" aside="(we didn’t pay them. we did feed them)">
+          <SectionHeading index="05" label="Reviews" id="reviews-title" aside="(real ones. unedited.)">
             The group <span className="text-accent">chat.</span>
           </SectionHeading>
           <a
@@ -40,7 +51,7 @@ export function Reviews() {
             <span className="label leading-relaxed text-ink-dim">
               /{site.rating.outOf} · {site.rating.count} reviews
               <br />
-              on {site.rating.source} ↗
+              Read them all on {site.rating.source} ↗
             </span>
           </a>
         </div>
@@ -55,67 +66,20 @@ export function Reviews() {
               🌕
             </span>
             <div className="min-w-0">
-              <p className="truncate [font-family:system-ui,-apple-system,'Segoe_UI',Roboto,sans-serif] text-[0.95rem] font-bold">{chatTitle}</p>
+              <p className={`truncate text-[0.95rem] font-bold ${chatFont}`}>{chatTitle}</p>
               <p className="truncate text-xs" style={{ color: "var(--chat-meta)" }}>
                 {chatSubtitle}
               </p>
             </div>
           </div>
 
-          <ol className="flex flex-col gap-1.5 px-3 py-5 md:px-4" style={wallpaper} aria-label="Guest messages">
-            {chat.map((m, i) => (
-              <li key={i} data-chat-item className={`relative flex flex-col ${m.isHostel ? "items-end" : "items-start"}`}>
-                <div
-                  data-typing
-                  aria-hidden="true"
-                  className={`absolute top-0 hidden rounded-xl bg-[var(--chat-in)] px-3.5 py-3 ${m.isHostel ? "right-0" : "left-0"}`}
-                >
-                  <span className="flex gap-1">
-                    {[0, 1, 2].map((d) => (
-                      <span
-                        key={d}
-                        className="typing-dot size-1.5 rounded-full"
-                        style={{ background: "var(--chat-meta)", animationDelay: `${d * 0.15}s` }}
-                      />
-                    ))}
-                  </span>
-                </div>
-                <div
-                  data-msg
-                  className={`max-w-[85%] rounded-xl px-3 pb-1.5 pt-2 [font-family:system-ui,-apple-system,'Segoe_UI',Roboto,sans-serif] text-[0.92rem] leading-snug shadow-sm ${
-                    m.isHostel ? "rounded-tr-sm bg-[var(--chat-out)]" : "rounded-tl-sm bg-[var(--chat-in)]"
-                  }`}
-                >
-                  {!m.isHostel ? (
-                    <p
-                      className="text-[0.8rem] font-bold text-[var(--n-dark)] in-data-[theme=day]:text-[var(--n-light)]"
-                      style={{ "--n-dark": colorFor(m.from)[0], "--n-light": colorFor(m.from)[1] } as React.CSSProperties}
-                    >
-                      ~ {m.from} {m.country}
-                    </p>
-                  ) : null}
-                  <p>
-                    {m.text}
-                    <span className="float-right ml-3 mt-1.5 text-[0.66rem]" style={{ color: "var(--chat-meta)" }}>
-                      {m.time}
-                      {m.isHostel ? <span className="ml-1 text-[#53bdeb]">✓✓</span> : null}
-                    </span>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <div className="flex items-center gap-2 bg-[var(--chat-in)] px-3 py-2.5">
-            <span className="flex-1 truncate rounded-full bg-[var(--chat-bg)] px-4 py-2.5 text-sm" style={{ color: "var(--chat-meta)" }}>
-              Message the fam…
-            </span>
-            <a
-              href={site.bookingUrl}
-              className="display grid h-10 shrink-0 place-items-center rounded-full bg-[#008069] px-4 text-xs text-white"
-            >
-              Join →
-            </a>
+          <div style={wallpaper}>
+            <ol className="flex flex-col gap-1.5 px-3 py-5 md:px-4" aria-label={`Guest reviews from ${site.rating.source}`}>
+              {items.map((item) => (
+                <Bubble key={item.key} item={item} />
+              ))}
+            </ol>
+            <ChatComposerLazy />
           </div>
         </div>
       </div>

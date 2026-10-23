@@ -16,7 +16,8 @@ function RoomCard({ room, n }: { room: Room; n: number }) {
         src={p.src}
         alt={p.alt}
         fill
-        sizes="(min-width: 1024px) 34vw, (min-width: 640px) 60vw, 84vw"
+        // 3:4 photo covering a taller card on phones renders ~1.3× the card width
+        sizes="(min-width: 1024px) 34vw, (min-width: 640px) 78vw, 108vw"
         placeholder="blur"
         blurDataURL={p.blurDataURL}
         className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] hover:scale-[1.04]"

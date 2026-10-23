@@ -68,7 +68,10 @@ export function Tribe() {
                       alt={p.alt}
                       fill
                       draggable={false}
-                      sizes="(min-width: 768px) 280px, 44vw"
+                      // photos are pre-cropped to the frame's 4:5, so this is the true rendered
+                      // width (+ headroom for the 1.06 hover zoom)
+                      sizes="(min-width: 768px) 300px, 47vw"
+                      quality={85}
                       placeholder="blur"
                       blurDataURL={p.blurDataURL}
                       className="pointer-events-none select-none object-cover"
