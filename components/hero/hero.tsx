@@ -81,7 +81,7 @@ export function Hero() {
               Come alone.
             </span>
             <span className="block">
-              Leave<br className="md:hidden" /> with<br className="hidden md:inline" /> a family.
+              Live<br className="md:hidden" /> with<br className="hidden md:inline" /> a family.
             </span>
           </h1>
           <div className="mt-6 flex flex-col gap-5 md:mt-10 md:flex-row md:items-end md:justify-between">
