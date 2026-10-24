@@ -34,9 +34,8 @@ export function Hero() {
     <section
       id="top"
       aria-labelledby="hero-title"
-      // desktop: tall wrapper = scroll runway for the moon. Mobile fills it by press-and-hold
-      // instead, so the hero is just one screen there (and for reduced motion).
-      className="relative h-svh md:h-[260svh] motion-reduce:h-svh"
+      // tall wrapper = scroll runway for the moon; collapses to one screen for reduced motion
+      className="relative h-[260svh] motion-reduce:h-svh"
     >
       <div className="on-photo sticky top-0 h-svh overflow-hidden">
         {/* photo layers */}
@@ -66,18 +65,6 @@ export function Hero() {
             className="display invisible absolute -left-[4%] top-[2%] whitespace-nowrap rounded-full bg-acid px-4 py-2 text-xs text-night shadow-[0_0_30px_#ff2fb3] md:text-sm"
           >
             Full moon, baby 🌕
-          </p>
-          {/* mobile: sits on the dark disc, revealed by JS once the moon is holdable */}
-          <p
-            data-moon-hint
-            aria-hidden="true"
-            className="label pointer-events-none invisible absolute inset-0 grid place-items-center text-center text-[0.6rem] leading-relaxed text-ink md:hidden"
-          >
-            <span className="animate-pulse">
-              Press &amp; hold
-              <br />
-              to fill the moon
-            </span>
           </p>
         </div>
 
@@ -113,7 +100,7 @@ export function Hero() {
         <p
           data-hero-hint
           aria-hidden="true"
-          className="label absolute bottom-12 right-6 hidden origin-right -rotate-90 text-[0.6rem] text-ink-dim md:block motion-reduce:hidden"
+          className="label absolute right-4 top-[45svh] origin-right -rotate-90 text-[0.6rem] text-ink-dim motion-reduce:hidden md:right-6 md:top-auto md:bottom-12"
         >
           Scroll to fill the moon ↓
         </p>
