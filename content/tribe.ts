@@ -25,5 +25,5 @@ export const tribe: Polaroid[] = [
   { photo: "tribe-goofy", caption: "when they say last round", rotate: 6, mobile: { x: 98, y: 75 }, desktop: { x: 68, y: 96 } },
   { photo: "tribe-barefoot", caption: "shoes are a construct", rotate: -6, mobile: { x: 2, y: 83 }, desktop: { x: 88, y: 74 } },
   { photo: "tribe-besties", caption: "strangers on monday", rotate: 3, mobile: { x: 98, y: 92 }, desktop: { x: 16, y: 46 } },
-  { photo: "tribe-duet", caption: "duet partners by wednesday", rotate: -5, mobile: { x: 2, y: 100 }, desktop: { x: 64, y: 46 } },
+  { photo: "tribe-mic", caption: "first song, zero shame", rotate: -5, mobile: { x: 2, y: 100 }, desktop: { x: 64, y: 46 } },
 ];
