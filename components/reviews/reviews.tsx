@@ -3,6 +3,7 @@ import { chatInitialCount, chatSubtitle, chatTitle, guestReviews, hostelIntro, h
 import { SectionHeading } from "../section-heading";
 import { BubbleBody, TypingDots, bubbleIn, chatFont, type ChatItem } from "./bubble";
 import { ChatComposerLazy } from "./chat-composer-lazy";
+import { ChatExpander } from "./chat-expander";
 import { ChatMotion } from "./chat-motion";
 
 /** WhatsApp-ish doodle wallpaper, pure CSS. */
@@ -74,11 +75,13 @@ export function Reviews() {
           </div>
 
           <div style={wallpaper}>
-            <ol className="flex flex-col gap-1.5 px-3 py-5 md:px-4" aria-label={`Guest reviews from ${site.rating.source}`}>
-              {items.map((item) => (
-                <Bubble key={item.key} item={item} />
-              ))}
-            </ol>
+            <ChatExpander count={items.length}>
+              <ol className="flex flex-col gap-1.5 px-3 py-5 md:px-4" aria-label={`Guest reviews from ${site.rating.source}`}>
+                {items.map((item) => (
+                  <Bubble key={item.key} item={item} />
+                ))}
+              </ol>
+            </ChatExpander>
             <ChatComposerLazy />
           </div>
         </div>
