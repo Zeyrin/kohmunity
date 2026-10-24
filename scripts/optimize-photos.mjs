@@ -42,6 +42,7 @@ const SELECTION = {
   "tribe-goofy": { file: "karaoke/-_SK97640.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.4 } },
   "tribe-besties": { file: "guest/-_SK95337.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.5 } },
   "tribe-hammock": { file: "guest/-_SK96067.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.55 } },
+  "tribe-duet": { file: "karaoke/-_SK98757.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.5 } },
   // events
   "event-yoga": "guest/-_SK95159.NEFs.JPG",
   "event-pool": "guest/-_SK95243.NEFs.JPG",
