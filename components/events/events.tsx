@@ -68,22 +68,24 @@ function EventRow({ e, i }: { e: EventItem; i: number }) {
 
       {p ? (
         <div
-          className={`relative col-start-2 mt-4 aspect-[4/3] w-40 overflow-hidden rounded-md md:col-start-3 md:mt-0 md:w-full ${
-            i % 2 ? "rotate-2" : "-rotate-2"
+          // phones: full row width, so the photo actually reads; desktop: the small tilted polaroid in column 3
+          className={`relative col-span-full mt-4 aspect-[16/10] w-full overflow-hidden rounded-md md:col-span-1 md:col-start-3 md:mt-0 md:aspect-[4/3] ${
+            i % 2 ? "rotate-1 md:rotate-2" : "-rotate-1 md:-rotate-2"
           }`}
         >
           <Image
             src={p.src}
             alt={p.alt}
             fill
-            sizes="(min-width: 768px) 224px, 160px"
+            sizes="(min-width: 768px) 224px, 100vw"
             placeholder="blur"
             blurDataURL={p.blurDataURL}
-            // duotone-ish: grayscale photo, accent shows through via multiply layer
-            className="object-cover grayscale contrast-125 transition-[filter] duration-500 group-hover:grayscale-0"
+            // duotone-ish on desktop: grayscale photo, accent shows through via multiply layer until hover.
+            // Touch screens never hover, so phones get the photo in full colour.
+            className="object-cover transition-[filter] duration-500 md:grayscale md:contrast-125 md:group-hover:grayscale-0"
             style={{ objectPosition: p.focus }}
           />
-          <div className="pointer-events-none absolute inset-0 bg-accent-3 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 hidden bg-accent-3 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0 md:block" aria-hidden="true" />
         </div>
       ) : null}
     </li>

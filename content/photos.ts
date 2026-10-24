@@ -42,6 +42,8 @@ const meta: Record<PhotoSlug, { alt: string; focus?: string }> = {
   "event-beerpong": { alt: "Two guests pose at the beer pong table with red cups at night", focus: "50% 40%" },
   "event-courtyard": { alt: "The hostel courtyard from above, full of guests at long tables at night", focus: "50% 55%" },
   "event-bar": { alt: "Guests celebrate on the bar top under a disco ball during the Full Moon pre-party", focus: "50% 40%" },
+  "event-dinner": { alt: "A table of new friends squeezes together for a photo under the string lights after dinner", focus: "50% 40%" },
+  "event-boat": { alt: "The wooden bow of a longtail boat heading across turquoise water towards a hidden beach between limestone cliffs", focus: "50% 60%" },
 };
 
 export type Photo = (typeof photoFiles)[PhotoSlug] & { slug: PhotoSlug; alt: string; focus: string };
