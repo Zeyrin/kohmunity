@@ -42,6 +42,7 @@ const SELECTION = {
   "tribe-goofy": { file: "karaoke/-_SK97640.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.4 } },
   "tribe-besties": { file: "guest/-_SK95337.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.5 } },
   "tribe-hammock": { file: "guest/-_SK96067.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.55 } },
+  "tribe-mic": { file: "karaoke/-_SK97630.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.4 } },
   // events
   "event-yoga": "guest/-_SK95159.NEFs.JPG",
   "event-pool": "guest/-_SK95243.NEFs.JPG",
@@ -50,6 +51,9 @@ const SELECTION = {
   "event-beerpong": "guest/-_SK95665.NEFs.JPG",
   "event-courtyard": "fullmoon/-_SK94637.NEFs.JPG",
   "event-bar": "fullmoon/-_SK94897.NEFs.JPG",
+  "event-dinner": "karaoke/-_SK97676.NEFs.JPG",
+  // CC0 stock (Wikimedia Commons, "long tail boat in the Kingdom of Thailand") until we shoot our own boat trip
+  "event-boat": "stock/longtail-bow-cc0.jpg",
 };
 
 await mkdir(OUT, { recursive: true });
@@ -74,7 +78,7 @@ for (const [slug, entry] of Object.entries(SELECTION)) {
       base = sharp(oriented.data).extract({ left: 0, top, width: w, height: ch });
     }
   }
-  const img = base.clone().resize(LONG_EDGE, LONG_EDGE, { fit: "inside" });
+  const img = base.clone().resize(LONG_EDGE, LONG_EDGE, { fit: "inside", withoutEnlargement: true });
   const { data, info } = await img
     .jpeg({ quality: 90, mozjpeg: true, progressive: true }) // high: next/image re-encodes to AVIF, avoid double loss
     .toBuffer({ resolveWithObject: true });

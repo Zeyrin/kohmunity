@@ -34,7 +34,7 @@ export function Tribe() {
 
       <ul
         data-tribe-wall
-        className="relative mx-auto mt-8 h-[420vw] max-w-[1600px] px-3 md:mt-4 md:h-[min(120vh,72vw)] md:px-8"
+        className="relative mx-auto mt-8 h-[460vw] max-w-[1600px] px-3 md:mt-4 md:h-[min(120vh,72vw)] md:px-8"
         aria-label="Guest photos"
       >
         {tribe.map((t, i) => {

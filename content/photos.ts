@@ -33,6 +33,7 @@ const meta: Record<PhotoSlug, { alt: string; focus?: string }> = {
   "tribe-barefoot": { alt: "A barefoot guest laughs on a wooden bench holding a water bottle", focus: "50% 35%" },
   "tribe-goofy": { alt: "A guest with a fringe pulls a mock-shocked face while holding a drink at the bar", focus: "40% 35%" },
   "tribe-besties": { alt: "Two friends smile side by side at the hostel bar", focus: "50% 35%" },
+  "tribe-mic": { alt: "A grinning guest belts into the karaoke mic under blue light while the crowd behind him dances", focus: "45% 40%" },
   "tribe-hammock": { alt: "Two guests in sunglasses lounge in a rainbow-striped hammock under a tree", focus: "55% 50%" },
 
   "event-yoga": { alt: "Guests lie on purple mats during the free morning yoga session in the open-air shala", focus: "55% 55%" },
@@ -42,6 +43,8 @@ const meta: Record<PhotoSlug, { alt: string; focus?: string }> = {
   "event-beerpong": { alt: "Two guests pose at the beer pong table with red cups at night", focus: "50% 40%" },
   "event-courtyard": { alt: "The hostel courtyard from above, full of guests at long tables at night", focus: "50% 55%" },
   "event-bar": { alt: "Guests celebrate on the bar top under a disco ball during the Full Moon pre-party", focus: "50% 40%" },
+  "event-dinner": { alt: "A table of new friends squeezes together for a photo under the string lights after dinner", focus: "50% 40%" },
+  "event-boat": { alt: "The wooden bow of a longtail boat heading across turquoise water towards a hidden beach between limestone cliffs", focus: "50% 60%" },
 };
 
 export type Photo = (typeof photoFiles)[PhotoSlug] & { slug: PhotoSlug; alt: string; focus: string };
