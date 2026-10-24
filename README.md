@@ -12,14 +12,17 @@ npm run reviews    # refresh the real Hostelworld reviews snapshot (content/revi
 
 ## Editing content (no component changes needed)
 
+Non-developers: see [UPDATING.md](UPDATING.md) for a step-by-step guide.
+
 | What | File |
 | --- | --- |
 | Booking URL, socials, address, ratings, policies, Full Moon date overrides | `content/config.ts` |
-| Rooms, prices, one-liners | `content/rooms.ts` |
+| Rooms, one-liners (no prices on purpose) | `content/rooms.ts` |
 | Weekly line-up (`source: "draft"` = invented, confirm before launch) | `content/events.ts` |
 | Group-chat reviews: real Hostelworld reviews, verbatim (`npm run reviews`; hide one via `EXCLUDE` in the script) | `content/reviews.hostelworld.json` |
 | Group-chat hostel lines, live announcements, how many reviews are static vs "arrive live" | `content/reviews.ts` |
 | Moon bot answers to visitors (built from the content files) | `lib/chat-replies.ts` |
+| Terms & Conditions page (`/terms`) | `content/terms.ts` |
 | Polaroid wall photos, captions, positions | `content/tribe.ts` |
 | Alt text + crop focus for every photo | `content/photos.ts` |
 

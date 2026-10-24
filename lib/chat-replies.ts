@@ -1,5 +1,5 @@
 import { site } from "@/content/config";
-import { currency, rooms } from "@/content/rooms";
+import { rooms } from "@/content/rooms";
 import { lineup } from "@/content/events";
 import { formatPartyDate, nextPartyNights } from "./moon";
 
@@ -31,14 +31,11 @@ export function replyTo(raw: string, now = new Date()): Reply {
     };
   }
   if (has(msg, "price", "cost", "how much", "cheap", "baht", "฿", "$", "€", "budget")) {
-    const list = rooms
-      .filter((r) => !r.isBonus)
-      .map((r) => `${r.kicker} from ${currency}${r.priceFrom}`)
-      .join(" · ");
-    return { text: `${list}. Book direct for the best price 😉`, cta: book };
+    return { text: "Prices move with the moon (Full Moon week is the busiest), so we don't post them here. Live rates are one tap away — and booking direct is always the best deal 😉", cta: book };
   }
   if (has(msg, "book", "bed", "room", "dorm", "private", "available", "availability", "vacan")) {
-    return { text: "8-bed and 4-bed dorms (curtains, A/C, ensuite) or a private double. Check live availability here 👇", cta: book };
+    const dorms = new Intl.ListFormat("en").format(rooms.filter((r) => r.id.startsWith("dorm-")).map((r) => r.kicker.split("-")[0]));
+    return { text: `${dorms}-bed dorms (curtains, A/C, ensuite) or a private double. Check live availability here 👇`, cta: book };
   }
   if (has(msg, "yoga", "stretch")) {
     return { text: "Free yoga every morning at 09:30. Hangover-friendly, we promise 🧘" };
@@ -60,7 +57,7 @@ export function replyTo(raw: string, now = new Date()): Reply {
     return { text: "Come alone, live with a family. Literally the point of this place. Family dinner Wednesday, you'll know everyone by Thursday 🫶", cta: book };
   }
   if (is(msg, "hi", "hey", "heyy", "hello", "yo", "sup", "salut", "hola", "ciao", "bonjour")) {
-    return { text: "Heyyy 👋 Welcome to the fam! Ask me about prices, the next Full Moon, events or how to find us." };
+    return { text: "Heyyy 👋 Welcome to the fam! Ask me about beds, the next Full Moon, events or how to find us." };
   }
   return {
     text: "I'm just a bot under the moon 🤖 A real human from reception will answer that on Instagram.",

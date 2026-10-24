@@ -91,7 +91,7 @@ export function Hero() {
                 Grab a bed <span aria-hidden="true">→</span>
               </a>
               <p className="label text-[0.62rem] text-ink-dim">
-                ★ {site.rating.score}/10 · {site.rating.count} reviews on {site.rating.source}
+                ★ {site.ratings.map((r) => `${r.score} on ${r.source}`).join(" · ")}
               </p>
             </div>
           </div>

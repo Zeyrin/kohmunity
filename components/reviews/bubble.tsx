@@ -68,7 +68,7 @@ export function BubbleBody({ item, time }: { item: ChatItem; time?: string }) {
         </p>
       ) : (
         <>
-          <blockquote cite={site.rating.url} className="whitespace-pre-line">
+          <blockquote cite={site.ratings[0].url} className="whitespace-pre-line">
             {item.review.text}
           </blockquote>
           <p className="mt-1 flex justify-between gap-3 text-[0.66rem]" style={{ color: "var(--chat-meta)" }}>

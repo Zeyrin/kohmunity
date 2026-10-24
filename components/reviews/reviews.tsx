@@ -42,19 +42,25 @@ export function Reviews() {
           <SectionHeading index="05" label="Reviews" id="reviews-title" aside="(real ones. unedited.)">
             The group <span className="text-accent">chat.</span>
           </SectionHeading>
-          <a
-            href={site.rating.url}
-            rel="noopener"
-            target="_blank"
-            className="mx-4 mt-8 inline-flex items-center gap-4 rounded-2xl border border-line px-5 py-4 transition-colors hover:border-accent md:mx-12"
-          >
-            <span className="display text-5xl text-accent">{site.rating.score}</span>
-            <span className="label leading-relaxed text-ink-dim">
-              /{site.rating.outOf} · {site.rating.count} reviews
-              <br />
-              Read them all on {site.rating.source} ↗
-            </span>
-          </a>
+          <ul className="mx-4 mt-8 flex flex-wrap gap-3 md:mx-12">
+            {site.ratings.map((r) => (
+              <li key={r.source}>
+                <a
+                  href={r.url}
+                  rel="noopener"
+                  target="_blank"
+                  className="inline-flex items-center gap-4 rounded-2xl border border-line px-5 py-4 transition-colors hover:border-accent"
+                >
+                  <span className="display text-5xl text-accent">{r.score}</span>
+                  <span className="label leading-relaxed text-ink-dim">
+                    /{r.outOf} · {r.count}+ reviews
+                    <br />
+                    Read them on {r.source} ↗
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* the chat window */}
@@ -76,7 +82,7 @@ export function Reviews() {
 
           <div style={wallpaper}>
             <ChatExpander count={items.length}>
-              <ol className="flex flex-col gap-1.5 px-3 py-5 md:px-4" aria-label={`Guest reviews from ${site.rating.source}`}>
+              <ol className="flex flex-col gap-1.5 px-3 py-5 md:px-4" aria-label={`Guest reviews from ${site.ratings[0].source}`}>
                 {items.map((item) => (
                   <Bubble key={item.key} item={item} />
                 ))}
