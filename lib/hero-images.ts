@@ -11,8 +11,8 @@ const SIZES = "100vw";
 const QUALITY = 70;
 
 const sets = {
-  night: { mobile: "day-floaties-portrait", desktop: "night-crew" },
-  day: { mobile: "night-dancer", desktop: "day-floaties" },
+  night: { mobile: "night-dancer", desktop: "night-crew" },
+  day: { mobile: "day-floaties-portrait", desktop: "day-floaties" },
   uv: { mobile: "uv-flex-portrait", desktop: "uv-flex" },
 } satisfies Record<string, { mobile: PhotoSlug; desktop: PhotoSlug }>;
 

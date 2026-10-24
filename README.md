@@ -38,7 +38,7 @@ regenerates daily.
 
 ## Architecture notes
 - **Theme**: `<html data-theme="day|night">` is set by a tiny inline head script before first paint
-  (saved choice → else local hour, 07–19 = day). All colours are CSS variables remapped per mode;
+  (saved choice → else night). All colours are CSS variables remapped per mode;
   `.on-photo` scopes always-light tokens for text sitting on photos. Full-moon eruption = `data-moon="full"`.
 - **Hero LCP**: the same head script preloads only the hero image variant (mode × viewport) the visitor sees.
 - **Motion**: `lib/use-section-motion.ts` boots each animated section after load + idle and only when it
