@@ -67,8 +67,7 @@ export const site = {
       outOf: 10,
       count: 250, // approximate — paste the exact number from the listing
       source: "Booking.com",
-      // PLACEHOLDER: paste the listing's own URL (booking.com/hotel/th/…). Until then this searches for it.
-      url: "https://www.booking.com/searchresults.html?ss=Kohmunity+Hostel+Koh+Phangan",
+      url: "https://www.booking.com/hotel/th/kohmunity-hostel.html",
       asOf: "2026-10",
     },
   ],

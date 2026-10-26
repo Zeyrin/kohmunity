@@ -34,8 +34,7 @@ export function HostelJsonLd() {
     sameAs: [
       site.socials.instagram.url,
       site.socials.tiktok.url,
-      // only real listing pages (a placeholder search link isn't "the same entity")
-      ...site.ratings.map((r) => r.url).filter((u) => !u.includes("searchresults")),
+      ...site.ratings.map((r) => r.url),
     ],
     amenityFeature: ["Swimming pool", "Free Wi-Fi", "Air conditioning", "Free yoga", "Bar", "Lockers", "Luggage storage"].map(
       (name) => ({ "@type": "LocationFeatureSpecification", name, value: true }),
