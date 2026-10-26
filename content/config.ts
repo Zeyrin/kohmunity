@@ -49,19 +49,33 @@ export const site = {
     musicOff: "00:00",
   },
 
-  /** Social proof, copied from the platform — update the numbers + date when you refresh them. */
-  rating: {
-    score: 9.4,
-    outOf: 10,
-    count: 493,
-    source: "Hostelworld",
-    url: "https://www.hostelworld.com/hostels/p/336440/kohmunity-hostel/",
-    asOf: "2026-10",
-  },
+  /**
+   * Social proof, copied from each platform — update the numbers + date when you refresh them.
+   * The first one is also where the group-chat reviews come from.
+   */
+  ratings: [
+    {
+      score: 9.4,
+      outOf: 10,
+      count: 493,
+      source: "Hostelworld",
+      url: "https://www.hostelworld.com/hostels/p/336440/kohmunity-hostel/",
+      asOf: "2026-10",
+    },
+    {
+      score: 9.2,
+      outOf: 10,
+      count: 250, // approximate — paste the exact number from the listing
+      source: "Booking.com",
+      url: "https://www.booking.com/hotel/th/kohmunity-hostel.html",
+      asOf: "2026-10",
+    },
+  ],
 
   /** Full Moon Party: local start time + manual date fixes (rule-date → real date). */
   partyStartsLocal: "20:00",
   fullMoonOverrides: {
+    "2026-10-26": "2026-10-27", // confirmed by the hostel
     // e.g. "2027-02-20": "2027-02-21", // shifted for Makha Bucha
   } as Record<string, string>,
 } as const;

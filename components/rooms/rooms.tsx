@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { site } from "@/content/config";
 import { photo } from "@/content/photos";
-import { currency, priceNote, rooms, type Room } from "@/content/rooms";
+import { priceNote, rooms, type Room } from "@/content/rooms";
 import { SectionHeading } from "../section-heading";
 import { RoomsPin } from "./rooms-pin";
 
@@ -40,20 +40,11 @@ function RoomCard({ room, n }: { room: Room; n: number }) {
         <h3 className="display text-[2.4rem] leading-[0.85] md:text-5xl">{room.name}</h3>
         <p className="serif-accent mt-3 text-xl leading-tight text-ink md:text-2xl">{room.oneLiner}</p>
         <div className="mt-5 flex items-end justify-between gap-4 border-t border-line pt-4">
-          {room.isBonus ? (
-            <p className="label text-ink-dim">{room.beds}</p>
-          ) : (
-            <>
-              <p>
-                <span className="label block text-[0.6rem] text-ink-dim">from</span>
-                <span className="display text-4xl text-accent">
-                  {currency}
-                  {room.priceFrom}
-                </span>
-                <span className="label ml-1 text-ink-dim">/{room.priceUnit}/night</span>
-              </p>
-              <p className="label text-right text-ink-dim">{room.beds}</p>
-            </>
+          <p className="label text-ink-dim">{room.beds}</p>
+          {room.isBonus ? null : (
+            <a href={site.bookingUrl} className="label shrink-0 border-b border-accent pb-0.5 text-ink hover:text-accent">
+              See prices →
+            </a>
           )}
         </div>
         {room.features.length ? (

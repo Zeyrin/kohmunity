@@ -10,12 +10,18 @@ export type EventItem = {
   /** Which mode the event belongs to — drives highlighting when Day/Night is toggled. */
   vibe: "day" | "night";
   /**
+   * Optional note for whoever edits this file:
    * "listing" = taken from the hostel's current Hostelworld listing.
    * "draft"   = invented to fill the week — confirm or edit before launch.
    */
-  source: "listing" | "draft";
+  source?: "listing" | "draft";
 };
 
+/**
+ * THE WEEKLY LINE-UP — see UPDATING.md for a step-by-step guide.
+ * One block per event, in the order they appear on the site. Copy a block to add an event,
+ * delete a block to remove one. `photo` is optional (pick a name from content/photos.ts).
+ */
 export const lineup: EventItem[] = [
   {
     day: "DAILY",

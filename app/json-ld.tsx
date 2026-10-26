@@ -1,5 +1,5 @@
 import { site } from "@/content/config";
-import { rooms, currency } from "@/content/rooms";
+import { rooms } from "@/content/rooms";
 
 /**
  * schema.org/Hostel for Google (local pack, hotel knowledge panel, "official site" signal).
@@ -8,7 +8,6 @@ import { rooms, currency } from "@/content/rooms";
  */
 export function HostelJsonLd() {
   const bookable = rooms.filter((r) => !r.isBonus);
-  const prices = bookable.map((r) => r.priceFrom);
   const data = {
     "@context": "https://schema.org",
     "@type": "Hostel",
@@ -18,7 +17,7 @@ export function HostelJsonLd() {
     description: site.description,
     image: [`${site.url}/opengraph-image`],
     slogan: site.tagline,
-    priceRange: `${currency}${Math.min(...prices)}–${currency}${Math.max(...prices)}`,
+    priceRange: "฿",
     currenciesAccepted: "THB",
     checkinTime: site.policies.checkIn.split("–")[0],
     checkoutTime: "12:00",
@@ -32,15 +31,17 @@ export function HostelJsonLd() {
     },
     geo: { "@type": "GeoCoordinates", latitude: site.location.geo.lat, longitude: site.location.geo.lng },
     hasMap: site.location.mapsUrl,
-    sameAs: [site.socials.instagram.url, site.socials.tiktok.url, site.rating.url],
+    sameAs: [
+      site.socials.instagram.url,
+      site.socials.tiktok.url,
+      ...site.ratings.map((r) => r.url),
+    ],
     amenityFeature: ["Swimming pool", "Free Wi-Fi", "Air conditioning", "Free yoga", "Bar", "Lockers", "Luggage storage"].map(
       (name) => ({ "@type": "LocationFeatureSpecification", name, value: true }),
     ),
     makesOffer: bookable.map((r) => ({
       "@type": "Offer",
       name: `${r.name} (${r.kicker})`,
-      price: r.priceFrom,
-      priceCurrency: "THB",
       url: site.bookingUrl,
     })),
   };

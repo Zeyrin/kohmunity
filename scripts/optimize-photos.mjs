@@ -35,7 +35,6 @@ const SELECTION = {
   "tribe-bear-hug": { file: "karaoke/-_SK92815.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.45 } },
   "tribe-bench-crew": { file: "guest/-_SK95727.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.5 } },
   "tribe-sunnies": { file: "guest/-_SK95498.NEFs.JPG", crop: { aspect: 4 / 5, y: 0.3 } },
-  "tribe-magic-cool": { file: "guest/-_SK95693.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.55 } },
   "tribe-dance": { file: "karaoke/-_SK97703.NEFs.JPG", crop: { aspect: 4 / 5, x: 0.55 } },
   "tribe-dreads": { file: "karaoke/-_SK98866.NEFs.JPG", crop: { aspect: 4 / 5, y: 0.45 } },
   "tribe-barefoot": { file: "guest/-_SK95516.NEFs.JPG", crop: { aspect: 4 / 5, y: 0.35 } },

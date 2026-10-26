@@ -91,19 +91,21 @@ export function Hero() {
                 Grab a bed <span aria-hidden="true">→</span>
               </a>
               <p className="label text-[0.62rem] text-ink-dim">
-                ★ {site.rating.score}/10 · {site.rating.count} reviews on {site.rating.source}
+                ★ {site.ratings.map((r) => `${r.score} on ${r.source}`).join(" · ")}
               </p>
             </div>
           </div>
+          {/* in the copy's flow (never positioned over it), so it can't overlap anything */}
+          <p
+            data-hero-hint
+            className="label mx-auto mt-5 flex w-fit items-center gap-2 rounded-full border border-ink/25 bg-night/40 px-4 py-2 text-[0.68rem] text-ink backdrop-blur-sm motion-reduce:hidden md:mt-6"
+          >
+            Scroll down to fill the moon
+            <span aria-hidden="true" className="inline-block animate-bounce text-accent">
+              ↓
+            </span>
+          </p>
         </div>
-
-        <p
-          data-hero-hint
-          aria-hidden="true"
-          className="label absolute right-4 top-[45svh] origin-right -rotate-90 text-[0.6rem] text-ink-dim motion-reduce:hidden md:right-6 md:top-auto md:bottom-12"
-        >
-          Scroll to fill the moon ↓
-        </p>
       </div>
     </section>
   );
