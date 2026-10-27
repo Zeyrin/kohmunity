@@ -32,12 +32,12 @@ function EventRow({ e, i }: { e: EventItem; i: number }) {
     <li
       data-event-row
       data-vibe={e.vibe}
-      className={`group relative grid grid-cols-[4.6rem_1fr] gap-x-3 border-t border-dashed border-line py-6 ${
-        isMoon ? "-mx-4 rounded-2xl bg-night px-4 text-cream" : ""
+      className={`group relative grid grid-cols-[4.6rem_1fr] gap-x-3 border-t border-dashed border-line py-6 md:grid-cols-[11.5rem_1fr_14rem] md:items-center md:gap-x-8 md:py-7 ${
+        isMoon ? "-mx-4 rounded-2xl bg-night px-4 text-cream md:-mx-6 md:px-6" : ""
       }`}
     >
       <div className={isMoon ? "on-photo" : undefined}>
-        <p className="display text-[1.6rem] leading-none text-accent">
+        <p className="display text-[1.6rem] leading-none text-accent md:text-5xl">
           <abbr title={DAY_NAMES[e.day]} className="no-underline">
             {e.day === "MONTHLY" ? "🌕" : e.day === "DAILY" ? "7/7" : e.day}
           </abbr>
@@ -46,7 +46,7 @@ function EventRow({ e, i }: { e: EventItem; i: number }) {
       </div>
 
       <div className={isMoon ? "on-photo" : undefined}>
-        <h3 className="display text-[1.55rem] leading-[0.92]">
+        <h3 className="display text-[1.55rem] leading-[0.92] md:text-[2.6rem]">
           {e.title}
           {e.free ? (
             <span
@@ -69,22 +69,24 @@ function EventRow({ e, i }: { e: EventItem; i: number }) {
 
       {p ? (
         <div
-          className={`relative col-start-2 mt-4 aspect-[4/3] w-40 overflow-hidden rounded-md ${
-            i % 2 ? "rotate-2" : "-rotate-2"
+          // phones: full row width, so the photo actually reads; desktop: the small tilted polaroid in column 3
+          className={`relative col-span-full mt-4 aspect-[16/10] w-full overflow-hidden rounded-md md:col-span-1 md:col-start-3 md:mt-0 md:aspect-[4/3] ${
+            i % 2 ? "rotate-1 md:rotate-2" : "-rotate-1 md:-rotate-2"
           }`}
         >
           <Image
             src={p.src}
             alt={p.alt}
             fill
-            sizes="160px"
+            sizes="(min-width: 768px) 224px, 100vw"
             placeholder="blur"
             blurDataURL={p.blurDataURL}
-            // duotone-ish: grayscale photo, accent shows through via multiply layer
-            className="object-cover grayscale contrast-125 transition-[filter] duration-500 group-hover:grayscale-0"
+            // duotone-ish on desktop: grayscale photo, accent shows through via multiply layer until hover.
+            // Touch screens never hover, so phones get the photo in full colour.
+            className="object-cover transition-[filter] duration-500 md:grayscale md:contrast-125 md:group-hover:grayscale-0"
             style={{ objectPosition: p.focus }}
           />
-          <div className="pointer-events-none absolute inset-0 bg-accent-3 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 hidden bg-accent-3 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0 md:block" aria-hidden="true" />
         </div>
       ) : null}
     </li>
@@ -99,12 +101,12 @@ export async function Events() {
         This week <span className="text-accent">at home.</span>
       </SectionHeading>
 
-      {/* the flyer — one phone-width layout on every screen */}
-      <div className="mt-12 px-3 md:mt-16">
+      {/* the flyer */}
+      <div className="mt-12 px-3 md:mt-16 md:px-12">
         <article
           data-flyer
           aria-label="Weekly line-up"
-          className="relative mx-auto max-w-xl overflow-hidden rounded-[1.75rem] border border-line bg-bg-2 px-4 py-8"
+          className="relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-line bg-bg-2 px-4 py-8 md:-rotate-1 md:px-10 md:py-12"
         >
           <div className="pointer-events-none absolute inset-0 opacity-70" style={halftone} aria-hidden="true" />
           <div className="relative">
@@ -112,20 +114,20 @@ export async function Events() {
               <p className="label text-ink">{site.name} presents</p>
               <p className="label text-ink-dim">Thong Sala · Koh Phangan</p>
             </div>
-            <p className="display mt-6 text-[min(17vw,6rem)] leading-[0.8] text-ink">
+            <p className="display mt-6 text-[17vw] leading-[0.8] text-ink md:text-[7.5rem]">
               The <span className="text-accent-2">line</span>&#8209;up
             </p>
-            <p className="serif-accent mt-2 text-xl text-ink-dim">
+            <p className="serif-accent mt-2 text-xl text-ink-dim md:text-2xl">
               Weekly, forever. Show up to one, leave with twelve friends.
             </p>
 
-            <ol className="mt-8">
+            <ol className="mt-8 md:mt-12">
               {lineup.map((e, i) => (
                 <EventRow key={`${e.day}-${e.title}`} e={e} i={i} />
               ))}
             </ol>
 
-            <div className="mt-8 flex flex-col gap-5 border-t-2 border-ink pt-6">
+            <div className="mt-8 flex flex-col gap-5 border-t-2 border-ink pt-6 md:flex-row md:items-center md:justify-between">
               <p className="label max-w-md leading-relaxed text-ink-dim">
                 Ages {site.policies.ages} · music off at {site.policies.musicOff} · no curfew · taxis to every big
                 party sorted at reception

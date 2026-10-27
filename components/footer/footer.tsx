@@ -129,7 +129,12 @@ export function Footer() {
         <p>
           © {site.legalName} · Ages {site.policies.ages} · Check-in {site.policies.checkIn}
         </p>
-        <p>Made on an island with questionable Wi-Fi 🌴</p>
+        <p>
+          <Link href="/terms" className="underline hover:text-accent">
+            Terms &amp; Conditions
+          </Link>{" "}
+          · Made on an island with questionable Wi-Fi 🌴
+        </p>
       </div>
       <FooterMotion />
     </footer>

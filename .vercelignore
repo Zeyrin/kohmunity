@@ -1,2 +1,4 @@
-# Camera originals (557 MB) are only inputs for scripts/optimize-photos.mjs
+# Camera originals (557 MB) are only inputs for scripts/optimize-photos.mjs.
+# Leading slash = repo root ONLY. Without it this also matched public/photos/ and
+# shipped the site without any images.
 /photos/

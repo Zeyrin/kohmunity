@@ -7,16 +7,22 @@ npm install
 npm run dev        # http://localhost:3000
 npm run build      # fails on purpose if anything becomes request-time (ensureStatic = "navigation")
 npm run photos     # only when changing which photos are used (reads /photos, writes /public/photos)
+npm run reviews    # refresh the real Hostelworld reviews snapshot (content/reviews.hostelworld.json)
 ```
 
 ## Editing content (no component changes needed)
 
+Non-developers: see [UPDATING.md](UPDATING.md) for a step-by-step guide.
+
 | What | File |
 | --- | --- |
 | Booking URL, socials, address, ratings, policies, Full Moon date overrides | `content/config.ts` |
-| Rooms, prices, one-liners | `content/rooms.ts` |
+| Rooms, one-liners (no prices on purpose) | `content/rooms.ts` |
 | Weekly line-up — **owners edit it at `/admin`**, see below (`content/events.ts` is the fallback) | `/admin` |
-| Group-chat reviews (**placeholder copy**, replace with real guest quotes) | `content/reviews.ts` |
+| Group-chat reviews: real Hostelworld reviews, verbatim (`npm run reviews`; hide one via `EXCLUDE` in the script) | `content/reviews.hostelworld.json` |
+| Group-chat hostel lines, live announcements, how many reviews are static vs "arrive live" | `content/reviews.ts` |
+| Moon bot answers to visitors (built from the content files) | `lib/chat-replies.ts` |
+| Terms & Conditions page (`/terms`) | `content/terms.ts` |
 | Polaroid wall photos, captions, positions | `content/tribe.ts` |
 | Alt text + crop focus for every photo | `content/photos.ts` |
 
@@ -43,7 +49,7 @@ regenerates daily.
 
 ## Architecture notes
 - **Theme**: `<html data-theme="day|night">` is set by a tiny inline head script before first paint
-  (saved choice → else local hour, 07–19 = day). All colours are CSS variables remapped per mode;
+  (saved choice → else night). All colours are CSS variables remapped per mode;
   `.on-photo` scopes always-light tokens for text sitting on photos. Full-moon eruption = `data-moon="full"`.
 - **Hero LCP**: the same head script preloads only the hero image variant (mode × viewport) the visitor sees.
 - **Motion**: `lib/use-section-motion.ts` boots each animated section after load + idle and only when it

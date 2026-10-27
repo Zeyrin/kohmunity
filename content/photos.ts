@@ -15,7 +15,7 @@ const meta: Record<PhotoSlug, { alt: string; focus?: string }> = {
   "uv-flex-portrait": { alt: "A shirtless guest flexes to show off neon green and pink UV body paint at the Full Moon pre-party", focus: "50% 35%" },
   "day-family": { alt: "About sixteen guests pose together by the pool with palm trees and blue sky behind them", focus: "50% 50%" },
 
-  "room-dorm-8": { alt: "The 8-bed dorm: black metal bunks with privacy curtains, reading lights and air conditioning", focus: "50% 55%" },
+  "room-dorm-8": { alt: "A mixed dorm: black metal bunks with privacy curtains, reading lights and air conditioning", focus: "50% 55%" },
   "room-dorm-4": { alt: "The 4-bed dorm: two bunk beds with fresh striped sheets, privacy curtains and a blue accent wall", focus: "55% 55%" },
   "room-private": { alt: "A private double room with mustard-yellow walls, towels folded into swans and a bedside lamp", focus: "50% 60%" },
   "room-private-alt": { alt: "Another view of the private double room with a big bed, wooden wall panels and an ensuite door", focus: "40% 60%" },
@@ -27,12 +27,12 @@ const meta: Record<PhotoSlug, { alt: string; focus?: string }> = {
   "tribe-bear-hug": { alt: "Three friends crush each other in a laughing group hug against a yellow wall", focus: "45% 40%" },
   "tribe-bench-crew": { alt: "Four tattooed friends pull faces together on a bench in the common area", focus: "50% 40%" },
   "tribe-sunnies": { alt: "A smiling guest with sunglasses pushed up on her head sits on cushions at night", focus: "55% 30%" },
-  "tribe-magic-cool": { alt: "Two guests and a bartender raise drinks at the bar under a hand-chalked Special Drink board", focus: "55% 45%" },
   "tribe-dance": { alt: "Two friends dance with their arms in the air under festoon lights at night", focus: "55% 40%" },
   "tribe-dreads": { alt: "A couple with blonde dreadlocks clink beer bottles at a table at night", focus: "50% 45%" },
   "tribe-barefoot": { alt: "A barefoot guest laughs on a wooden bench holding a water bottle", focus: "50% 35%" },
   "tribe-goofy": { alt: "A guest with a fringe pulls a mock-shocked face while holding a drink at the bar", focus: "40% 35%" },
   "tribe-besties": { alt: "Two friends smile side by side at the hostel bar", focus: "50% 35%" },
+  "tribe-mic": { alt: "A grinning guest belts into the karaoke mic under blue light while the crowd behind him dances", focus: "45% 40%" },
   "tribe-hammock": { alt: "Two guests in sunglasses lounge in a rainbow-striped hammock under a tree", focus: "55% 50%" },
 
   "event-yoga": { alt: "Guests lie on purple mats during the free morning yoga session in the open-air shala", focus: "55% 55%" },
@@ -42,6 +42,8 @@ const meta: Record<PhotoSlug, { alt: string; focus?: string }> = {
   "event-beerpong": { alt: "Two guests pose at the beer pong table with red cups at night", focus: "50% 40%" },
   "event-courtyard": { alt: "The hostel courtyard from above, full of guests at long tables at night", focus: "50% 55%" },
   "event-bar": { alt: "Guests celebrate on the bar top under a disco ball during the Full Moon pre-party", focus: "50% 40%" },
+  "event-dinner": { alt: "A table of new friends squeezes together for a photo under the string lights after dinner", focus: "50% 40%" },
+  "event-boat": { alt: "The wooden bow of a longtail boat heading across turquoise water towards a hidden beach between limestone cliffs", focus: "50% 60%" },
 };
 
 export type Photo = (typeof photoFiles)[PhotoSlug] & { slug: PhotoSlug; alt: string; focus: string };

@@ -2,14 +2,15 @@
 import { writeFile } from "node:fs/promises";
 import sharp from "sharp";
 
-// 128×128 monochrome noise tile (alpha-only so it works on both day and night backgrounds)
-const N = 128;
+// 160×160 soft grain tile: random grey per pixel at low, varying alpha — reads as film/paper
+// texture rather than "particles", and works on both day and night backgrounds.
+const N = 160;
 const px = Buffer.alloc(N * N * 4);
 for (let i = 0; i < N * N; i++) {
-  const v = Math.random() * 255;
-  px.set([v, v, v, Math.random() < 0.5 ? 255 : 0], i * 4);
+  const v = 128 + (Math.random() - 0.5) * 255;
+  px.set([v, v, v, Math.round(Math.random() * 46)], i * 4);
 }
-await sharp(px, { raw: { width: N, height: N, channels: 4 } }).webp({ quality: 40, alphaQuality: 40 }).toFile("public/noise.webp");
+await sharp(px, { raw: { width: N, height: N, channels: 4 } }).webp({ quality: 50, alphaQuality: 60 }).toFile("public/noise.webp");
 
 // Moon icon: full moon with a UV halo on night indigo
 const svg = (size, pad) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="${size}" height="${size}">

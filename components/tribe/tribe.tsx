@@ -34,7 +34,7 @@ export function Tribe() {
 
       <ul
         data-tribe-wall
-        className="relative mx-auto mt-8 h-[420vw] max-w-[1600px] px-3 md:mt-4 md:h-[min(120vh,72vw)] md:px-8"
+        className="relative mx-auto mt-8 h-[460vw] max-w-[1600px] px-3 md:mt-4 md:h-[min(120vh,72vw)] md:px-8"
         aria-label="Guest photos"
       >
         {tribe.map((t, i) => {
@@ -68,7 +68,10 @@ export function Tribe() {
                       alt={p.alt}
                       fill
                       draggable={false}
-                      sizes="(min-width: 768px) 280px, 44vw"
+                      // photos are pre-cropped to the frame's 4:5, so this is the true rendered
+                      // width (+ headroom for the 1.06 hover zoom)
+                      sizes="(min-width: 768px) 300px, 47vw"
+                      quality={85}
                       placeholder="blur"
                       blurDataURL={p.blurDataURL}
                       className="pointer-events-none select-none object-cover"

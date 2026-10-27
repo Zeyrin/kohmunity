@@ -8,11 +8,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // satori supports a CSS subset: no `inset`, every box is flex. Static inputs → read once at module scope (prerendered at build).
-// No sharp here: its ESM build imports package.json as a JSON module, which Node < 22.12 reports as an
-// ExperimentalWarning that the Next dev overlay shows as an error. satori's objectFit does the crop.
 const root = process.cwd();
 const [photo, display, serif] = await Promise.all([
-  readFile(join(root, "public/photos/night-crew.jpg")),
+  // hero shot pre-cropped to 1200×630 by scripts/optimize-photos.mjs (no image lib at runtime)
+  readFile(join(root, "assets/og-base.jpg")),
   readFile(join(root, "assets/fonts/Unbounded-Black.ttf")),
   readFile(join(root, "assets/fonts/InstrumentSerif-Italic.ttf")),
 ]);
@@ -64,7 +63,7 @@ export default function Image() {
             <span>COME</span>
             <span>ALONE.</span>
           </div>
-          <div style={{ fontFamily: "Instrument", fontSize: 64, color: "#c8ff1a", marginTop: 10 }}>Leave with a family.</div>
+          <div style={{ fontFamily: "Instrument", fontSize: 64, color: "#c8ff1a", marginTop: 10 }}>Live with a family.</div>
           <div style={{ display: "flex", marginTop: 26, fontSize: 22, letterSpacing: 4, color: "#c7c0e8", fontFamily: "Unbounded" }}>
             KOHMUNITY · KOH PHANGAN · FULL MOON ISLAND
           </div>

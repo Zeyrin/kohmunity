@@ -10,6 +10,7 @@ export type EventItem = {
   /** Which mode the event belongs to — drives highlighting when Day/Night is toggled. */
   vibe: "day" | "night";
   /**
+   * Optional note for whoever edits this file:
    * "listing" = taken from the hostel's current Hostelworld listing.
    * "draft"   = invented to fill the week — confirm or edit before launch.
    */
@@ -17,8 +18,8 @@ export type EventItem = {
 };
 
 /**
- * Fallback line-up. Once LINEUP_SHEET_CSV_URL is set, the owners edit the Google Sheet instead
- * (see lib/lineup.ts) and this list is only used if the sheet can't be reached.
+ * Fallback line-up. The owners edit the live one at /admin (stored in Supabase, see lib/lineup.ts);
+ * this list is shown until something is saved there, or if Supabase can't be reached.
  */
 export const lineup: EventItem[] = [
   {
@@ -55,6 +56,7 @@ export const lineup: EventItem[] = [
     title: "Family Dinner",
     blurb: "Free dinner, one long table, poolside pre-drinks. This is where it happens.",
     free: true,
+    photo: "event-dinner",
     vibe: "night",
     source: "listing",
   },
@@ -63,6 +65,7 @@ export const lineup: EventItem[] = [
     time: "10:00",
     title: "Boat Trip",
     blurb: "Longtail, snorkels, a hidden beach and zero phone signal. Bring sunscreen, lose inhibitions.",
+    photo: "event-boat",
     vibe: "day",
     source: "draft",
   },
