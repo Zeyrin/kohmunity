@@ -15,7 +15,7 @@ npm run photos     # only when changing which photos are used (reads /photos, wr
 | --- | --- |
 | Booking URL, socials, address, ratings, policies, Full Moon date overrides | `content/config.ts` |
 | Rooms, prices, one-liners | `content/rooms.ts` |
-| Weekly line-up (`source: "draft"` = invented, confirm before launch) | `content/events.ts` |
+| Weekly line-up — **owners edit it at `/admin`**, see below (`content/events.ts` is the fallback) | `/admin` |
 | Group-chat reviews (**placeholder copy**, replace with real guest quotes) | `content/reviews.ts` |
 | Polaroid wall photos, captions, positions | `content/tribe.ts` |
 | Alt text + crop focus for every photo | `content/photos.ts` |
@@ -26,6 +26,14 @@ Search the repo for `PLACEHOLDER` to find everything that still needs a real val
 Camera originals live in `/photos` (not deployed, see `.vercelignore`). `scripts/optimize-photos.mjs`
 picks the curated set, crops the portrait hero variants, strips EXIF (GPS!), writes 2400px masters to
 `/public/photos` and a typed manifest (`content/photos.generated.ts`). `next/image` serves AVIF/WebP from those.
+
+### Line-up admin (`/admin`)
+Owners log in with a password and edit, reorder, add or delete events; saving is live immediately.
+The line-up is stored as one JSON row in Supabase (`site_content`, key `lineup`); until something is saved,
+or if Supabase is unreachable, the site shows `content/events.ts`.
+
+Setup: run `supabase/site_content.sql` in the Supabase SQL editor, then set `ADMIN_PASSWORD`, `SUPABASE_URL`
+and `SUPABASE_SERVICE_ROLE_KEY` in Vercel (see `.env.example`). Code: `app/admin/`, `lib/lineup.ts`.
 
 ### Full Moon dates
 `lib/moon.ts` computes full moons (Meeus algorithm, ~1 min accuracy) and maps them to party nights

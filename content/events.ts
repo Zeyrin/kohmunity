@@ -13,9 +13,13 @@ export type EventItem = {
    * "listing" = taken from the hostel's current Hostelworld listing.
    * "draft"   = invented to fill the week — confirm or edit before launch.
    */
-  source: "listing" | "draft";
+  source?: "listing" | "draft";
 };
 
+/**
+ * Fallback line-up. Once LINEUP_SHEET_CSV_URL is set, the owners edit the Google Sheet instead
+ * (see lib/lineup.ts) and this list is only used if the sheet can't be reached.
+ */
 export const lineup: EventItem[] = [
   {
     day: "DAILY",

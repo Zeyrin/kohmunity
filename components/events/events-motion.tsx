@@ -2,18 +2,9 @@
 
 import { useSectionMotion } from "@/lib/use-section-motion";
 
-/** Flyer straightens as it scrolls in; rows slam in like a printed line-up; FREE stamps thud. */
+/** Rows slam in like a printed line-up; FREE stamps thud. */
 export function EventsMotion() {
   const marker = useSectionMotion(({ gsap, ScrollTrigger }, section) => {
-    const flyer = section.querySelector("[data-flyer]");
-    // tilt only where there's room for it; on phones a rotated flyer would clip the screen edge
-    if (flyer && window.matchMedia("(min-width: 768px)").matches) {
-      gsap.fromTo(
-        flyer,
-        { rotate: -4, y: 60 },
-        { rotate: -1, y: 0, ease: "none", scrollTrigger: { trigger: flyer, start: "top bottom", end: "top 30%", scrub: true } },
-      );
-    }
     const rows = gsap.utils.toArray<HTMLElement>("[data-event-row]", section);
     gsap.set(rows, { autoAlpha: 0, x: -40 });
     ScrollTrigger.batch(rows, {
